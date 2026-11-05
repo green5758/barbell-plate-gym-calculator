@@ -421,8 +421,12 @@ def get_cumulative_product_reviews():
                 ("Home Bodybuilding Smith & Cable Studio (14'×12' | 7 Mats)", "14'×12'", 7, "370-Lb Plates", "Smith + Crossover")
             ]
             g_name, dim_s, mat_c, wt_s, rack_s = gym_configs[extra_num % len(gym_configs)]
+            
+            # PERBAIKAN: Pindahkan proses replace ke luar f-string untuk menghindari SyntaxError backslash
+            slug_dim = dim_s.replace("'", "ft").replace("×", "x")
+            
             proc_tuple = (
-                f"home-gym-{dim_s.replace('\'','ft').replace('×','x')}-{mat_c}-stall-mats-rack-review-{extra_num}",
+                f"home-gym-{slug_dim}-{mat_c}-stall-mats-rack-review-{extra_num}",
                 f"{dim_s} Home Gym ({mat_c}× Stall Mats, {rack_s} & {wt_s}) Setup Review (#{extra_num})",
                 f"{dim_s} Complete Garage Gym",
                 "4.8",
